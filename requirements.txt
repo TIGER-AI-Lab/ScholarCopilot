@@ -1,0 +1,7 @@
+torch
+faiss-cpu
+transformers
+gradio
+tempfile
+h5py
+tqdm
