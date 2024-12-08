@@ -411,7 +411,6 @@ with gr.Blocks(css="""
                 }
                 </style>
             """)
-
             with gr.Row(elem_classes="title-row", equal_height=True):
                 gr.Markdown(
                     """<h1 style='font-size: 2.5em; margin: 0; padding: 0;'>Scholar Copilot</h1>""",
@@ -420,9 +419,9 @@ with gr.Blocks(css="""
             gr.Markdown(
                 """<h3 class='subtitle'> Your Academic Writing Assistant -- By <a href="https://huggingface.co/TIGER-Lab" target="_blank">TIGER-Lab</a></h3>
                    <p>Authors: Yubo Wang, Xueguang Ma, Xiang Yue, and Wenhu Chen</p>
-                   <p>Contact: <a href="mailto:yubo.wang.sunny@gmail.com">yubo.wang.sunny@gmail.com</a></p>"""
+                   <p>Contact: <a href="mailto:yubo.wang.sunny@gmail.com">yubo.wang.sunny@gmail.com</a></p>
+                   <p>To set up the ScholarCopilot demo on your own server, visit <a href="https://github.com/TIGER-AI-Lab/ScholarCopilot" target="_blank">https://github.com/TIGER-AI-Lab/ScholarCopilot</a></p>"""
             )
-
         # Introduction section
         with gr.Column(elem_classes="intro-section"):
             gr.Markdown("""
