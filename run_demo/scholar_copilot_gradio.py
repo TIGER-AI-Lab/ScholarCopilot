@@ -53,8 +53,7 @@ def check_3_sentence(display_text):
     return display_text[: end_index + 1]
 
 
-def stream_complete_3_sentence(text, progress=gr.Progress()):
-    global citations_data
+def stream_complete_3_sentence(text, citations_data, progress=gr.Progress()):
     sentence_num = 0
     enough = False
     current_text = text
@@ -72,7 +71,7 @@ def stream_complete_3_sentence(text, progress=gr.Progress()):
             sentence_num += 1
             print("sentence_num: ", sentence_num, "each", each)
         curr_yield_text += " " + each
-        yield curr_yield_text
+        yield curr_yield_text, citations_data
         if sentence_num == 3:
             enough = True
             display_text = curr_yield_text
@@ -95,7 +94,7 @@ def stream_complete_3_sentence(text, progress=gr.Progress()):
                 sentence_num += 1
                 print("sentence_num: ", sentence_num, "each", each)
             curr_yield_text += " " + each
-            yield curr_yield_text
+            yield curr_yield_text, citations_data
             if sentence_num == 3:
                 enough = True
                 display_text = curr_yield_text
@@ -108,12 +107,11 @@ def stream_complete_3_sentence(text, progress=gr.Progress()):
     display_text, citation_data_list = post_process_output_text(display_text, reference_id_list, citation_map_data)
     citations_data += citation_data_list
     # print("global citations_data", citations_data)
-    yield display_text
+    yield display_text, citations_data
     time.sleep(0.1)
 
 
-def stream_generate(text, progress=gr.Progress()):
-    global citations_data
+def stream_generate(text, citations_data, progress=gr.Progress()):
     sentence_num = 0
     enough = False
     current_text = text
@@ -131,7 +129,7 @@ def stream_generate(text, progress=gr.Progress()):
             sentence_num += 1
             print("sentence_num: ", sentence_num, "each", each)
         curr_yield_text += " " + each
-        yield curr_yield_text
+        yield curr_yield_text, citations_data
         time.sleep(0.1)
     curr_prefix_length = len(curr_yield_text)
     while cite_start_hidden_state is not None and not enough:
@@ -149,12 +147,12 @@ def stream_generate(text, progress=gr.Progress()):
                 sentence_num += 1
                 print("sentence_num: ", sentence_num, "each", each)
             curr_yield_text += " " + each
-            yield curr_yield_text
+            yield curr_yield_text, citations_data
             time.sleep(0.1)
         curr_prefix_length = len(curr_yield_text)
     display_text, citation_data_list = post_process_output_text(display_text, reference_id_list, citation_map_data)
     citations_data += citation_data_list
-    yield display_text
+    yield display_text, citations_data
     time.sleep(0.1)
 
 
@@ -169,7 +167,6 @@ def format_citation(citation_key, url):
 
 
 def search_and_show_citations(input_text):
-    global citations_data, curr_search_candidates
     curr_citations_data = generate_citation(input_text)
     curr_search_candidates = curr_citations_data
     choices = []
@@ -186,13 +183,12 @@ def search_and_show_citations(input_text):
         citation_checkboxes: gr.CheckboxGroup(
             choices=choices,
             value=[],
-        )
+        ),
+        curr_search_candidates: curr_search_candidates
     }
 
 
-def insert_selected_citations(text, selected_citations):
-    global citations_data, curr_search_candidates
-
+def insert_selected_citations(text, selected_citations, citations_data, curr_search_candidates):
     if not selected_citations:
         return text
 
@@ -205,32 +201,31 @@ def insert_selected_citations(text, selected_citations):
     return new_text
 
 
-def download_citation_history():
-    global citations_data
-    print("citations_data", citations_data)
-    if not citations_data:
-        return None  # 如果没有引用历史，返回None
+# def download_citation_history():
+#     global citations_data
+#     print("citations_data", citations_data)
+#     if not citations_data:
+#         return None  # 如果没有引用历史，返回None
+#
+#     bibtex_entries = []
+#     for cit in citations_data:
+#         if cit["bibtex"] not in bibtex_entries:
+#             bibtex_entries.append(cit["bibtex"])
+#     content = "\n\n".join(bibtex_entries)
+#
+#     # 添加时间戳注释
+#     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#     header = f"% Citation history generated at {timestamp}\n% Total citations: {len(bibtex_entries)}\n\n"
+#
+#     # 创建临时文件
+#     with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".bib") as temp_file:
+#         temp_file.write(header + content)
+#         temp_file_path = temp_file.name
+#
+#     return temp_file_path
 
-    bibtex_entries = []
-    for cit in citations_data:
-        if cit["bibtex"] not in bibtex_entries:
-            bibtex_entries.append(cit["bibtex"])
-    content = "\n\n".join(bibtex_entries)
 
-    # 添加时间戳注释
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    header = f"% Citation history generated at {timestamp}\n% Total citations: {len(bibtex_entries)}\n\n"
-
-    # 创建临时文件
-    with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".bib") as temp_file:
-        temp_file.write(header + content)
-        temp_file_path = temp_file.name
-
-    return temp_file_path
-
-
-def update_bibtex():
-    global citations_data
+def update_bibtex(citations_data):
     print("citations_data", citations_data)
     if not citations_data:
         return None  # 如果没有引用历史，返回None
@@ -243,20 +238,22 @@ def update_bibtex():
     return content
 
 
-def clear_cache():
-    global citations_data
-    citations_data = []
+def clear_cache(citations_data, curr_search_candidates):
+    # citations_data = []
+    # curr_search_candidates = []
     citations_checkbox = gr.CheckboxGroup(
         choices=[],
         value=[],
     )
-    return "", citations_checkbox, ""
+    return "", citations_checkbox, "", [], []
 
 
-example_text = ""
-with open("src/examples.txt", "r") as fi:
-    for line in fi.readlines():
-        example_text += line
+def load_example(file_name=""):
+    example_text = ""
+    with open(f"src/{file_name}-example.txt", "r") as fi:
+        for line in fi.readlines():
+            example_text += line
+
 
 with gr.Blocks(css="""
     :root {
@@ -386,6 +383,8 @@ with gr.Blocks(css="""
         margin-top: 10px;
     }
 """) as app:
+    citations_data = gr.State([])
+    curr_search_candidates = gr.State([])
     with gr.Column(elem_classes="container"):
         with gr.Column(elem_classes="header"):
             gr.Markdown("""
@@ -480,38 +479,38 @@ with gr.Blocks(css="""
         # Event handlers
         complete_btn.click(
             fn=stream_complete_3_sentence,
-            inputs=[text_input],
-            outputs=[text_input],
+            inputs=[text_input, citations_data],
+            outputs=[text_input, citations_data],
             queue=True
         )
 
         generate_btn.click(
             fn=stream_generate,
-            inputs=[text_input],
-            outputs=[text_input],
+            inputs=[text_input, citations_data],
+            outputs=[text_input, citations_data],
             queue=True
         )
 
         citation_btn.click(
             fn=search_and_show_citations,
             inputs=[text_input],
-            outputs=[citation_box, citation_checkboxes]
+            outputs=[citation_box, citation_checkboxes, curr_search_candidates]
         )
 
         insert_citation_btn.click(
             fn=insert_selected_citations,
-            inputs=[text_input, citation_checkboxes],
+            inputs=[text_input, citation_checkboxes, citations_data, curr_search_candidates],
             outputs=[text_input]
         )
 
         clear_btn.click(
             fn=clear_cache,
-            inputs=[],
-            outputs=[text_input, citation_checkboxes, bibtex_display]
+            inputs=[citations_data, curr_search_candidates],
+            outputs=[text_input, citation_checkboxes, bibtex_display, citations_data, curr_search_candidates]
         )
         update_bibtex_btn.click(
             fn=update_bibtex,
-            inputs=[],
+            inputs=[citations_data],
             outputs=[bibtex_display]
         )
 
@@ -526,7 +525,6 @@ if __name__ == "__main__":
     index_dir = "../data/"
     index, lookup_indices = load_faiss_index(index_dir)
     print("index building finished")
-    citations_data = []
     curr_search_candidates = []
 
     app.queue()
