@@ -5,10 +5,6 @@ import torch
 import faiss
 import time
 import gradio as gr
-# temp_dir = "./gradio_tmp"
-# os.makedirs(temp_dir, exist_ok=True)
-# os.environ['GRADIO_TEMP_DIR'] = temp_dir
-# tempfile.tempdir = temp_dir
 
 
 def generate_citation(input_text):
@@ -102,11 +98,8 @@ def stream_complete_3_sentence(text, citations_data, progress=gr.Progress()):
                 break
             time.sleep(0.1)
         curr_prefix_length = len(curr_yield_text)
-    # print("11 current_text", current_text)
-    # display_text, _ = replace_citations(current_text, reference_id_list, citation_map_data)
     display_text, citation_data_list = post_process_output_text(display_text, reference_id_list, citation_map_data)
     citations_data += citation_data_list
-    # print("global citations_data", citations_data)
     yield display_text, citations_data
     time.sleep(0.1)
 
@@ -201,30 +194,6 @@ def insert_selected_citations(text, selected_citations, citations_data, curr_sea
     return new_text
 
 
-# def download_citation_history():
-#     global citations_data
-#     print("citations_data", citations_data)
-#     if not citations_data:
-#         return None  # 如果没有引用历史，返回None
-#
-#     bibtex_entries = []
-#     for cit in citations_data:
-#         if cit["bibtex"] not in bibtex_entries:
-#             bibtex_entries.append(cit["bibtex"])
-#     content = "\n\n".join(bibtex_entries)
-#
-#     # 添加时间戳注释
-#     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-#     header = f"% Citation history generated at {timestamp}\n% Total citations: {len(bibtex_entries)}\n\n"
-#
-#     # 创建临时文件
-#     with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".bib") as temp_file:
-#         temp_file.write(header + content)
-#         temp_file_path = temp_file.name
-#
-#     return temp_file_path
-
-
 def update_bibtex(citations_data):
     print("citations_data", citations_data)
     if not citations_data:
@@ -253,6 +222,18 @@ def load_example(file_name=""):
     with open(f"src/{file_name}", "r") as fi:
         for line in fi.readlines():
             example_text += line
+    return example_text
+
+
+def load_example_text(choice):
+    if choice == "Template":
+        return load_example("template.txt")
+    elif choice == "Example 1":
+        return load_example("mmlu-pro-example.txt")
+    elif choice == "Example 2":
+        return load_example("harness-example.txt")
+    elif choice == "Example 3":
+        return load_example("vlm2vec-example.txt")
 
 
 with gr.Blocks(css="""
@@ -382,6 +363,27 @@ with gr.Blocks(css="""
         border: 1px solid var(--color-1);
         margin-top: 10px;
     }
+    .example-selector {
+        margin-bottom: 20px;
+    }
+    .example-selector select {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid var(--color-1);
+        border-radius: 8px;
+        background-color: white;
+        font-size: 16px;
+        color: #333;
+        cursor: pointer;
+    }
+    .example-selector select:hover {
+        border-color: var(--color-3);
+    }
+    .example-selector select:focus {
+        outline: none;
+        border-color: var(--color-1);
+        box-shadow: 0 0 5px rgba(137, 168, 178, 0.3);
+    }
 """) as app:
     citations_data = gr.State([])
     curr_search_candidates = gr.State([])
@@ -443,6 +445,12 @@ with gr.Blocks(css="""
         example_text = load_example("template.txt")
         # Main editor section
         with gr.Column(elem_classes="main-editor"):
+            example_selector = gr.Dropdown(
+                choices=["Template", "Example 1", "Example 2", "Example 3"],
+                value="Default",
+                label="Choose an example:",
+                elem_classes="example-selector"
+            )
             text_input = gr.Textbox(
                 lines=20,
                 label="Write your paper here",
@@ -513,6 +521,11 @@ with gr.Blocks(css="""
             fn=update_bibtex,
             inputs=[citations_data],
             outputs=[bibtex_display]
+        )
+        example_selector.change(
+            fn=load_example_text,
+            inputs=[example_selector],
+            outputs=[text_input]
         )
 
 if __name__ == "__main__":
