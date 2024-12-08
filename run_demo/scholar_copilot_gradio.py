@@ -516,7 +516,7 @@ with gr.Blocks(css="""
 
 if __name__ == "__main__":
     model_path = "../model_v1208/"
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model, tokenizer = load_model(model_path, device)
     meta_data_path = "../data/corpus_data_arxiv_1129.jsonl"
     meta_data = load_meta_data(meta_data_path)

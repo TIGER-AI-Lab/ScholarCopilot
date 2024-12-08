@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="832f61a4-8a2b-46cb-9f69-8e9d0151d0cd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_demo/scholar_copilot_gradio.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_demo/scholar_copilot_gradio.py" afterDir="false" />
-    </list>
+    <list default="true" id="832f61a4-8a2b-46cb-9f69-8e9d0151d0cd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,14 +23,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/MyDisk/2024/git/ScholarCopilot/run_demo",
+    "last_opened_file_path": "/Users/MyDisk/2024/git/ScholarCopilot/run_demo/src",
     "nodejs_package_manager_path": "npm"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/run_demo" />
       <recent name="$PROJECT_DIR$/run_demo/src" />
+      <recent name="$PROJECT_DIR$/run_demo" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -50,7 +46,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733588590587</updated>
       <workItem from="1733588592327" duration="1129000" />
-      <workItem from="1733589728690" duration="9282000" />
+      <workItem from="1733589728690" duration="10283000" />
     </task>
     <servers />
   </component>
