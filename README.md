@@ -48,4 +48,4 @@ bash run_demo.sh
 
 ## 📖 Demo
 
-[![Scholar Copilot Demo Video](https://img.youtube.com/vi/QlY7S52sWDA/0.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
+[![Scholar Copilot Demo Video](https://img.youtube.com/vi/QlY7S52sWDA/maxresdefault.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
