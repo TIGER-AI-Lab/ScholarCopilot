@@ -171,14 +171,15 @@ def search_and_show_citations(input_text):
         item = format_citation(citation_key + ": " + title, url)
         print("item", item)
         choices.append(item)
-    return {
-        citation_box: gr.Group(visible=True),
-        citation_checkboxes: gr.CheckboxGroup(
-            choices=choices,
-            value=[],
-        ),
-        curr_search_candidates: curr_search_candidates
-    }
+    # return {
+    #     citation_box: gr.Group(visible=True),
+    #     citation_checkboxes: gr.CheckboxGroup(
+    #         choices=choices,
+    #         value=[],
+    #     ),
+    #     curr_search_candidates: curr_search_candidates
+    # }
+    return gr.Group(visible=True), gr.CheckboxGroup(choices=choices, value=[]), curr_search_candidates
 
 
 def insert_selected_citations(text, selected_citations, citations_data, curr_search_candidates):
