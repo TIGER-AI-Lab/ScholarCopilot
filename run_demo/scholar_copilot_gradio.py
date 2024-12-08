@@ -61,7 +61,7 @@ def stream_complete_3_sentence(text, citations_data, progress=gr.Progress()):
     display_text, citation_data_list = replace_citations(current_text, reference_id_list, citation_map_data)
     citations_data += citation_data_list
     curr_yield_text, yield_list = split_yield_list(display_text, curr_prefix_length)
-    print("curr_yield_text, yield_list", curr_yield_text, yield_list)
+    # print("curr_yield_text, yield_list", curr_yield_text, yield_list)
     for each in yield_list:
         if "." in each and (each.endswith(".") or ".\n" in each):
             sentence_num += 1
@@ -84,7 +84,7 @@ def stream_complete_3_sentence(text, citations_data, progress=gr.Progress()):
         display_text, citation_data_list = replace_citations(current_text, reference_id_list, citation_map_data)
         citations_data += citation_data_list
         curr_yield_text, yield_list = split_yield_list(display_text, curr_prefix_length)
-        print("curr_yield_text, yield_list", curr_yield_text, yield_list)
+        # print("curr_yield_text, yield_list", curr_yield_text, yield_list)
         for each in yield_list:
             if "." in each and (each.endswith(".") or ".\n" in each):
                 sentence_num += 1
@@ -116,7 +116,7 @@ def stream_generate(text, citations_data, progress=gr.Progress()):
     display_text, citation_data_list = replace_citations(current_text, reference_id_list, citation_map_data)
     citations_data += citation_data_list
     curr_yield_text, yield_list = split_yield_list(display_text, curr_prefix_length)
-    print("curr_yield_text, yield_list", curr_yield_text, yield_list)
+    # print("curr_yield_text, yield_list", curr_yield_text, yield_list)
     for each in yield_list:
         if "." in each and (each.endswith(".") or ".\n" in each):
             sentence_num += 1
@@ -134,7 +134,7 @@ def stream_generate(text, citations_data, progress=gr.Progress()):
         display_text, citation_data_list = replace_citations(current_text, reference_id_list, citation_map_data)
         citations_data += citation_data_list
         curr_yield_text, yield_list = split_yield_list(display_text, curr_prefix_length)
-        print("curr_yield_text, yield_list", curr_yield_text, yield_list)
+        # print("curr_yield_text, yield_list", curr_yield_text, yield_list)
         for each in yield_list:
             if "." in each and (each.endswith(".") or ".\n" in each):
                 sentence_num += 1
@@ -169,7 +169,7 @@ def search_and_show_citations(input_text):
         title = cit["title"].replace("\n", " ").replace("  ", " ")
         url = f" (https://arxiv.org/abs/{paper_id})"
         item = format_citation(citation_key + ": " + title, url)
-        print("item", item)
+        # print("item", item)
         choices.append(item)
     # return {
     #     citation_box: gr.Group(visible=True),
@@ -196,7 +196,7 @@ def insert_selected_citations(text, selected_citations, citations_data, curr_sea
 
 
 def update_bibtex(citations_data):
-    print("citations_data", citations_data)
+    # print("citations_data", citations_data)
     if not citations_data:
         return None  # 如果没有引用历史，返回None
 
