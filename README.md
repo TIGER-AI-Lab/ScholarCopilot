@@ -46,6 +46,6 @@ bash download.sh
 bash run_demo.sh
 ```
 
-## 📖 Demo
+## 📖 Demo Video
 
 [![Scholar Copilot Demo Video](https://img.youtube.com/vi/QlY7S52sWDA/maxresdefault.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
