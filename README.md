@@ -1,6 +1,6 @@
 # ScholarCopilot
 
-🔥 [Try our live demo here](https://huggingface.co/spaces/TIGER-Lab/ScholarCopilot) (Before using, first click the "Clear all" button to clear other users' cache)
+🔥 [Try our live demo here](https://huggingface.co/spaces/TIGER-Lab/ScholarCopilot)
 
 Scholar Copilot is an intelligent academic writing assistant that enhances the research writing process through AI-powered text completion and citation suggestions. Built by [TIGER-Lab](https://huggingface.co/TIGER-Lab), it aims to streamline academic writing while maintaining high scholarly standards.
 
