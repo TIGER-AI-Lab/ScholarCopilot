@@ -16,7 +16,7 @@ Scholar Copilot is an intelligent academic writing assistant that enhances the r
 
 ## Inference Pipeline Overview
 
-Scholar Copilot employs a unified model architecture that seamlessly integrates retrieval and generation through a dynamic switching mechanism. During the generation process, the model autonomously determines appropriate citation points using learned citation patterns. When a citation is deemed necessary, the model temporarily halts generation, utilizes the hidden states of the citation token to retrieve relevant papers from the corpus, inserts the selected references, and then resumes coherent text generation. This integrated approach ensures smooth transitions between content generation and citation incorporation while maintaining contextual consistency throughout the document.
+Scholar Copilot employs a unified model architecture that seamlessly integrates retrieval and generation through a dynamic switching mechanism. During the generation process, the model autonomously determines appropriate citation points using learned citation patterns. When a citation is deemed necessary, the model temporarily halts generation, utilizes the hidden states of the citation token to retrieve relevant papers from the corpus, inserts the selected references, and then resumes coherent text generation.
 
 <img width="1022" alt="image" src="https://github.com/user-attachments/assets/487890f7-c450-49d6-ac3c-da2d9fb48eba">
 
