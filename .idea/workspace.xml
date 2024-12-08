@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="832f61a4-8a2b-46cb-9f69-8e9d0151d0cd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/download.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run_demo_scripts/download.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/quickstart.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run_demo_scripts/quickstart.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_demo/run_demo.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run_demo/run_demo.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_demo/scholar_copilot_gradio.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_demo/scholar_copilot_gradio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_demo/scholar_copilot_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_demo/scholar_copilot_model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,16 +23,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/MyDisk/2024/git/ScholarCopilot&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/MyDisk/2024/git/ScholarCopilot/run_demo/src"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/run_demo/src" />
+      <recent name="$PROJECT_DIR$/run_demo" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -47,7 +50,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733588590587</updated>
       <workItem from="1733588592327" duration="1129000" />
-      <workItem from="1733589728690" duration="1378000" />
+      <workItem from="1733589728690" duration="3030000" />
     </task>
     <servers />
   </component>

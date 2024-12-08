@@ -197,8 +197,8 @@ def post_process_output_text(res_text, reference_id_list, citation_map):
     # print("post_process_output_text, res_text", res_text)
     output_text, citation_info_list = replace_citations(res_text, reference_id_list, citation_map)
     # print("post_process_output_text, citation_info_list ", citation_info_list)
-    # output_text = output_text.replace("<|paper_start|> ", "").replace(" <|paper_end|>", "")
-    output_text = output_text.replace("<|paper_start|> ", "")
+    output_text = output_text.replace("<|paper_start|> ", "").replace(" <|section_end|>", "")
+    # output_text = output_text.replace("<|paper_start|> ", "")
     output_text = merge_consecutive_citations(output_text)
     return output_text, citation_info_list
 
@@ -217,9 +217,8 @@ def merge_consecutive_citations(text):
     return result
 
 
-def load_meta_data():
+def load_meta_data(meta_data_path):
     print("loading corpus data...")
-    meta_data_path = "../corpus_data/corpus_data_arxiv_1129.jsonl"
     meta_data = {}
     with open(meta_data_path, "r") as fi:
         for line in tqdm(fi.readlines()):
