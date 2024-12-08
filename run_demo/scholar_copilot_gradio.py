@@ -422,6 +422,8 @@ with gr.Blocks(css="""
                    <p>Contact: <a href="mailto:yubo.wang.sunny@gmail.com">yubo.wang.sunny@gmail.com</a></p>
                    <p>To set up the ScholarCopilot demo on your own server, visit <a href="https://github.com/TIGER-AI-Lab/ScholarCopilot" target="_blank">https://github.com/TIGER-AI-Lab/ScholarCopilot</a></p>"""
             )
+
+
         # Introduction section
         with gr.Column(elem_classes="intro-section"):
             gr.Markdown("""
