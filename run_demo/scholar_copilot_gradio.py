@@ -250,7 +250,7 @@ def clear_cache(citations_data, curr_search_candidates):
 
 def load_example(file_name=""):
     example_text = ""
-    with open(f"src/{file_name}-example.txt", "r") as fi:
+    with open(f"src/{file_name}", "r") as fi:
         for line in fi.readlines():
             example_text += line
 
@@ -440,6 +440,7 @@ with gr.Blocks(css="""
 
             gr.Markdown("""The current version of ScholarCopilot primarily focuses on the introduction and related work sections of academic papers. We will support full-paper writing in future releases.""")
 
+        example_text = load_example("template.txt")
         # Main editor section
         with gr.Column(elem_classes="main-editor"):
             text_input = gr.Textbox(
