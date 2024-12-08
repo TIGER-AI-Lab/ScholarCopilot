@@ -48,4 +48,4 @@ bash run_demo.sh
 
 ## 📖 Demo
 
-[![Video Title](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
+[![Video Title](https://img.youtube.com/vi/QlY7S52sWDA/0.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
