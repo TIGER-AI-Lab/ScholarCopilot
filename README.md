@@ -27,7 +27,7 @@ To set up the ScholarCopilot demo on your own server, follow these simple steps:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/circlesharp/openllm.git
+git clone git@github.com:TIGER-AI-Lab/ScholarCopilot.git
 cd ScholarCopilot/run_demo
 ```
 
