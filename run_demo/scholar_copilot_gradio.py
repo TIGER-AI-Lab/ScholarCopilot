@@ -534,9 +534,11 @@ if __name__ == "__main__":
     model_path = "../model_v1208/"
     device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
     model, tokenizer = load_model(model_path, device)
-    meta_data_path = "../data/corpus_data_arxiv_1129.jsonl"
+    # meta_data_path = "../data/corpus_data_arxiv_1129.jsonl"
+    meta_data_path = "../data/corpus_data_arxiv_1215.jsonl"
     meta_data = load_meta_data(meta_data_path)
-    citation_map_data_path = "../data/bibtex_info_1202.jsonl"
+    # citation_map_data_path = "../data/bibtex_info_1202.jsonl"
+    citation_map_data_path = "../data/corpus_data_arxiv_1215.jsonl"
     citation_map_data = load_citation_map_data(citation_map_data_path)
     index_dir = "../data/"
     index, lookup_indices = load_faiss_index(index_dir)
