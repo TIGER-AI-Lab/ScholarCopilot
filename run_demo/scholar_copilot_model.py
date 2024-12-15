@@ -238,7 +238,7 @@ def load_citation_map_data(citation_map_data_path):
             citation_key = re.sub(r'\s+', '', citation_key)
             curr["citation_key"] = citation_key
 
-            citation_map_data[curr["paper_id"]] = curr
+            citation_map_data[curr.get("paper_id", curr.get("id", None))] = curr
     print("citation_map_data loaded")
     return citation_map_data
 
