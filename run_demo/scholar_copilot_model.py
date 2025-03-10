@@ -221,7 +221,7 @@ def load_meta_data(meta_data_path):
     print("loading corpus data...")
     meta_data = {}
     with open(meta_data_path, "r") as fi:
-        for line in tqdm(fi.readlines()):
+        for line in fi.readlines():
             curr = json.loads(line)
             if curr["corpus_id"] not in meta_data:
                 meta_data[curr["corpus_id"]] = curr
