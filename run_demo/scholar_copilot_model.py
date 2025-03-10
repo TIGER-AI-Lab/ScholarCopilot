@@ -293,6 +293,7 @@ def load_model(model_path, device):
                       '<|reference_end|>']
     tokenizer.add_tokens(special_tokens)
     model.resize_token_embeddings(len(tokenizer))
+    print("model loaded successfully")
     return model, tokenizer
 
 
