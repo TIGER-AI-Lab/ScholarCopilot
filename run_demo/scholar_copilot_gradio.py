@@ -164,6 +164,7 @@ def search_and_show_citations(input_text):
     curr_search_candidates = curr_citations_data
     choices = []
     for cit in curr_citations_data:
+        print("cit.keys()", list(cit.keys()))
         paper_id = cit["id"]
         citation_key = cit["citation_key"]
         title = cit["title"].replace("\n", " ").replace("  ", " ")
