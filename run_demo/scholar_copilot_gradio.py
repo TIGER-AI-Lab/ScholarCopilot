@@ -164,7 +164,7 @@ def search_and_show_citations(input_text):
     curr_search_candidates = curr_citations_data
     choices = []
     for cit in curr_citations_data:
-        print("cit.keys()", list(cit.keys()))
+        # print("cit.keys()", list(cit.keys()))
         paper_id = cit["paper_id"]
         citation_key = cit["citation_key"]
         title = cit["title"].replace("\n", " ").replace("  ", " ")
@@ -533,7 +533,7 @@ with gr.Blocks(css="""
 
 if __name__ == "__main__":
     model_path = "../model_v1208/"
-    device = torch.device("cuda:4" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
     model, tokenizer = load_model(model_path, device)
     # meta_data_path = "../data/corpus_data_arxiv_1129.jsonl"
     meta_data_path = "../data/corpus_data_arxiv_1215.jsonl"
