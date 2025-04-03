@@ -1,6 +1,6 @@
 # ScholarCopilot
 
-🔥 [Try our live demo here](https://huggingface.co/spaces/TIGER-Lab/ScholarCopilot)
+Links: [paper](https://arxiv.org/abs/2504.00824) | [model](https://huggingface.co/TIGER-Lab/ScholarCopilot-v1) | [demo](https://huggingface.co/spaces/TIGER-Lab/ScholarCopilot)
 
 Scholar Copilot is an intelligent academic writing assistant that enhances the research writing process through AI-powered text completion and citation suggestions. Built by [TIGER-Lab](https://huggingface.co/TIGER-Lab), it aims to streamline academic writing while maintaining high scholarly standards.
 
@@ -52,19 +52,13 @@ bash run_demo.sh
 
 [![Scholar Copilot Demo Video](https://img.youtube.com/vi/QlY7S52sWDA/maxresdefault.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
 
-
-## Train your own model
-
-1. Download the training data:
-```bash
-cd train/
-bash download.sh
+## Citation
 ```
-
-2. Configure and run the training script (To reproduce our results, you can use the hyperparameters in the script and 4 machines with 8 GPUs each (32 GPUs in total).)
-```bash
-cd src/
-bash start_train.sh
+@article{wang2024scholarcopilot,
+  title={ScholarCopilot: Training Large Language Models for Academic Writing with Accurate Citations},
+  author = {Wang, Yubo and Ma, Xueguang and Nie, Ping and Zeng, Huaye and Lyu, Zhiheng and Zhang, Yuxuan and Schneider, Benjamin and Lu, Yi and Yue, Xiang and Chen, Wenhu},
+  journal={arXiv preprint arXiv:2504.00824},
+  year={2025}
+}
 ```
-
 
