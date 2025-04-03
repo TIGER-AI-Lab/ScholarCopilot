@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="description" content="ScholarCopilot:
-    Training Large Language Models for Academic Writing with Accurate Citations">
+    Training LLMs for Academic Writing with Accurate Citations">
     <meta property="og:title" content="ScholarCopilot:
-    Training Large Language Models for Academic Writing with Accurate Citations" />
+    Training LLMs for Academic Writing with Accurate Citations" />
     <meta property="og:description" content="We propose ScholarCopilot, where models learn to dynamically retrieve and cite scholarly references during academic writing rather than simply generate text without proper attribution." />
     <meta property="og:url" content="https://tiger-ai-lab.github.io/ScholarCopilot/" />
     <meta property="og:image" content="" />
@@ -102,7 +102,7 @@
                                       <span class="icon">
                                         🤗
                                       </span>
-                                      <span>Models</span>
+                                      <span>Model</span>
                                   </a>
                                 </span>
 
@@ -180,7 +180,7 @@
             <h1 class="title is-1">Traditional RAG vs. ScholarCopilot</h1>
             <div class="content has-text-justified">
               <p>
-                Comparison between traditional Retrieval-Augmented Generation (RAG) methods (left) and ScholarCopilot (right). Traditional RAG follows a static retrieval-then-generation pipeline, retrieving references independently before generation. ScholarCopilot dynamically interleaves retrieval and generation by producing retrieval tokens ([RET]) based on current context, enabling context-aware citation retrieval and optional user refinement.
+                We introduce ScholarCopilot, an agentic RAG framework for academic writing that dynamically integrates text generation and citation retrieval. Unlike traditional approaches with separate retrieval and generation stages, our system generates special retrieval tokens ([RET]) based on evolving context, pauses generation to retrieve relevant references, and incorporates their content into subsequent steps. Retrieval token representations are optimized through contrastive learning for efficient similarity search. ScholarCopilot also supports optional user refinement during the iterative process, enhancing citation accuracy and content coherence without additional overhead.
               </p>
             </div>
           </div>
@@ -213,7 +213,7 @@
             <h1 class="title is-1">Dataset Curation</h1>
             <div class="content has-text-justified">
               <p>
-                The pipeline for creating the ScholarCopilot dataset. Our final dataset includes 10M citations matched from arXiv and 6.8M citations matched from Semantic Scholar (one paper may be cited by multiple articles).
+                We built a large-scale dataset of 500K arXiv computer science papers, with 10M citations matched from arXiv and 6.8M from Semantic Scholar (papers may be cited multiple times). Dataset creation involved five stages: 1) paper collection, 2) structure parsing, 3) citation extraction, 4) reference matching, and 5) dataset integration. Each paper averages 38 citations with 87% successfully matched to academic databases.
               </p>
             </div>
           </div>
@@ -245,7 +245,7 @@
             <h1 class="title is-1">Training Method</h1>
             <div class="content has-text-justified">
               <p>
-                Unified training framework of ScholarCopilot.} The architecture jointly optimizes the next token prediction loss for text generation and the contrastive loss for citation retrieval. Retrieval tokens ([RET]) dynamically trigger retrieval. (q, d^+) indicates the positive pair of query and document during contrastive learning, and (q, d^-) indicates the negative pair. The generation model and retrieval model share parameters. In this figure, Paper 1 and Paper 2 can be considered as hard negatives for each other.
+                ScholarCopilot jointly optimizes generation and citation retrieval through two objectives: next token prediction for text generation and contrastive learning for citation retrieval. For generation, it uses standard autoregressive language modeling to maximize token likelihood conditioned on previous tokens and retrieved content. For retrieval, it employs contrastive learning to optimize retrieval token representations, increasing similarity between these tokens and relevant citations while decreasing similarity with irrelevant ones. Positive citations come from ground-truth papers, while negative examples are obtained through in-batch sampling. The system minimizes a combined loss function (L_total = L_g + L_r).
               </p>
             </div>
           </div>
@@ -309,7 +309,7 @@
                     <h1 class="title is-1">Citation Accuracy Evaluation</h1>
                     <div class="content has-text-justified">
                         <p>
-                            Here we compare citation retrieval performance across different methods. ScholarCopilot significantly outperforms baselines like E5-Mistral-7B-Instruct and BM25, achieving 40.1% top-1 recall and 64.8% recall@10. Results demonstrate the effectiveness of our unified training approach that optimizes retrieval tokens during generation, capturing nuanced citation intent through context-aware queries.
+                            Here we compare citation retrieval performance across different methods. ScholarCopilot significantly outperforms baselines like E5-Mistral-7B-Instruct and BM25, achieving 40.1% top-1 recall and 64.8% recall@10.
                         </p>
                     </div>
                 </div>
