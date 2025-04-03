@@ -52,6 +52,21 @@ bash run_demo.sh
 
 [![Scholar Copilot Demo Video](https://img.youtube.com/vi/QlY7S52sWDA/maxresdefault.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
 
+
+## Train your own model
+
+1. Download the training data:
+```bash
+cd train/
+bash download.sh
+```
+
+2. Configure and run the training script (To reproduce our results, you can use the hyperparameters in the script and 4 machines with 8 GPUs each (32 GPUs in total).)
+```bash
+cd src/
+bash start_train.sh
+```
+
 ## Citation
 ```
 @article{wang2024scholarcopilot,
