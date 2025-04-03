@@ -51,3 +51,13 @@ bash run_demo.sh
 ## 📖 Demo Video
 
 [![Scholar Copilot Demo Video](https://img.youtube.com/vi/QlY7S52sWDA/maxresdefault.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
+
+## Citation
+```
+@article{wang2024scholarcopilot,
+  title={ScholarCopilot: Training Large Language Models for Academic Writing with Accurate Citations},
+  author = {Wang, Yubo and Ma, Xueguang and Nie, Ping and Zeng, Huaye and Lyu, Zhiheng and Zhang, Yuxuan and Schneider, Benjamin and Lu, Yi and Yue, Xiang and Chen, Wenhu},
+  journal={arXiv preprint arXiv:2504.00824},
+  year={2025}
+}
+```
