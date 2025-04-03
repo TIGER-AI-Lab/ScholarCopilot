@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Critique Fine-Tuning: Learning to Critique is More Effective than Learning to Imitate">
+    <meta property="og:title" content="Critique Fine-Tuning: Learning to Critique is More Effective than Learning to Imitate" />
+    <meta property="og:description" content="We propose Critique Fine-Tuning (CFT), where models learn to critique noisy responses rather than simply imitate correct ones." />
+    <meta property="og:url" content="https://tiger-ai-lab.github.io/CritiqueFineTuning/" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <title>Critique Fine-Tuning</title>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">
+                            Critique Fine-Tuning: Learning to Critique is More Effective than Learning to Imitate
+                        </h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <sup>♠️</sup>Yubo Wang,
+                            </span>
+                            <span class="author-block">
+                                <sup>♣</sup>Xiang Yue,
+                            </span>
+                            <span class="author-block">
+                                <sup>♠️</sup>Wenhu Chen
+                            </span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- GitHub link -->
+                                <span class="link-block">
+                                    <a href="https://github.com/TIGER-AI-Lab/CritiqueFineTuning" target="_blank"
+                                    class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code</span>
+                                    </a>
+                                </span>
+
+                                <!-- Paper link (placeholder) -->
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2501.17703" target="_blank"
+                                    class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="ai ai-arxiv"></i>
+                                    </span>
+                                    <span>Paper</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                  <a href="https://huggingface.co/datasets/TIGER-Lab/WebInstruct-CFT" target="_blank"
+                                  class="external-link button is-normal is-rounded is-dark">
+                                      <span class="icon">
+                                        🤗
+                                      </span>
+                                      <span>CFT Dataset</span>
+                                  </a>
+                                </span>
+
+                                <span class="link-block">
+                                  <a href="https://huggingface.co/TIGER-Lab/Qwen2.5-Math-7B-CFT" target="_blank"
+                                  class="external-link button is-normal is-rounded is-dark">
+                                      <span class="icon">
+                                        🤗
+                                      </span>
+                                      <span>CFT Models</span>
+                                  </a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                            <sup>♠️</sup>University of Waterloo,
+                            <sup>♣</sup>Carnegie Mellon University
+                            </span>
+                            <br>
+                            <span class="author-block">
+                                <small>
+                                    yubo.wang.sunny@gmail.com,
+                                    wenhuchen@uwaterloo.ca
+                                </small>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section hero is-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h1 class="title is-3">Abstract</h1>
+                    <div class="content has-text-justified">
+                        <p>
+                            Supervised Fine-Tuning (SFT) is commonly used to train language models to imitate annotated responses for given instructions. In this paper, we challenge this paradigm and propose Critique Fine-Tuning (CFT), a strategy where models learn to critique noisy responses rather than simply imitate correct ones. Inspired by human learning processes that emphasize critical thinking, CFT encourages deeper analysis and nuanced understanding-traits often overlooked by standard SFT. To validate the effectiveness of CFT, we construct a 50K-sample dataset from WebInstruct, using GPT-4o as the teacher to generate critiques in the form of (input=[query; noisy response], output=critique). CFT on this dataset yields a consistent 4–10% improvement over SFT on six math benchmarks with different base models like Qwen2.5, Qwen2.5-Math and DeepSeek-Math. We further expand to MetaMath and NuminaMath datasets and observe similar gains over SFT. Notably, our Qwen2.5-Math-CFT model-trained on just 50K samples-matches or outperforms competitive models such as AceMath and Qwen2.5-Math-Instruct on most benchmarks, both of which use over 2M samples. Ablation studies show that CFT is robust to the source of noisy response and teacher critique model. Through these findings, we argue that critique-based training offers a more effective alternative to advance the reasoning of language models.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-full">
+                        <div class="item">
+                            <!-- Your image here -->
+                            <img src="static/images/teaser.png" alt="CFT" />
+                            <h2 class="subtitle">
+                                Figure 1: Comparison between CFT and SFT on 50K samples from WebInstruct). SFT-verified means SFT training on the responses validated by GPT-4o, SFT-GPT4o means SFT training on the responses from GPT-4o. CFT is our approach, which trains on the critique provided by GPT-4o
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h1 class="title is-1">CFT vs. SFT</h1>
+            <div class="content has-text-justified">
+              <p>
+                To evaluate the effectiveness of CFT, we compare it with various SFT methods on three 7B-scale base models using mathematical reasoning benchmarks. All the experiments are trained with WebInstruct subset.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Image carousel -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-full">
+                        <div class="item">
+                            <!-- Your image here -->
+                            <img src="static/images/main_result.png" alt="main_result" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End image carousel -->
+
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h1 class="title is-1">Qwen2.5-Math-7B-CFT vs. Other Competitive Models</h1>
+            <div class="content has-text-justified">
+              <p>
+                We compare our best 7B CFT-models with other competitive models with different scales. We expanded the evaluation benchmarks to cover broader STEM topics.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Image carousel -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-full">
+                        <div class="item">
+                            <!-- Your image here -->
+                            <img src="static/images/vs_other_reasoning_models.png" alt="vs_other_reasoning_models" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End image carousel -->
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h1 class="title is-1">Training Dynamics Comparison</h1>
+            <div class="content has-text-justified">
+              <p>
+                Training dynamics comparison of different methods on Qwen2.5-Math-7B across key mathematical reasoning benchmarks. We compare CFT with two SFT variants: SFT-V (trained on WebInstruct-verified) and SFT-G (trained on WebInstruct-GPT4o). The x-axis represents training steps, and the y-axis shows the accuracy on each benchmark. CFT demonstrates consistently better performance and faster convergence across most tasks
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Image carousel -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-three-quarters">
+                        <div class="item">
+                            <!-- Your image here -->
+                            <img src="static/images/training_dynamics.png" alt="training_dynamics" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End image carousel -->
+
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h1 class="title is-1">Comparison with RL-based Method</h1>
+            <div class="content has-text-justified">
+              <p>
+                We compare the efficiency and performance of different RL-based methods for mathematical reasoning. Key findings: (1) Our method achieves similar performance with 144x less computation cost, (2) Shows strong performance on rigorous math tests like Minerva-Math and AMC23.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Image carousel -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-half">
+                        <div class="item">
+                            <!-- Your image here -->
+                            <img src="static/images/simple_rl_compare.png" alt="simple_rl_compare" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End image carousel -->
+    <section class="section hero is-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h1 class="title is-1">Case Studies</h1>
+                    <div class="content has-text-justified">
+                        <p>
+                            Here we showcase detailed examples comparing the performance between three models: CFT model (Qwen2.5-Math-7B-CFT), the original model (Qwen2.5-Math-7B), and SFT model. These cases demonstrate how different training approaches affect mathematical reasoning abilities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <!-- Case Study 1: CFT vs Original -->
+                <div class="box mb-6">
+                    <h3 class="title is-4">Case Study 1: Sequential Fraction Operations</h3>
+                    <div class="content">
+                        <div class="notification is-info is-light mb-4">
+                            <h4 class="title is-5">Problem:</h4>
+                            <p>Sam is carrying a 2 gallon bucket of milk to his house from the barn, which is 3 miles away from his house. However, the bucket has a leak in it. For each mile he walks, there is $\frac{2}{3}$ as much milk in the bucket as at the beginning of the mile. How many gallons of milk will be in the bucket when Sam gets home?</p>
+                        </div>
+
+                        <div class="columns is-multiline">
+                            <div class="column is-half">
+                                <div class="notification is-success">
+                                    <h4 class="title is-5">CFT Model Solution</h4>
+                                    <div class="content has-text-justified">
+                                        <p><strong>Step-by-step solution:</strong></p>
+                                        <ol>
+                                            <li><strong>Initial Amount:</strong> 2 gallons</li>
+                                            <li><strong>After First Mile:</strong><br>
+                                                $2 \cdot \frac{2}{3} = \frac{4}{3}$ gallons</li>
+                                            <li><strong>After Second Mile:</strong><br>
+                                                $\frac{4}{3} \cdot \frac{2}{3} = \frac{8}{9}$ gallons</li>
+                                            <li><strong>After Third Mile:</strong><br>
+                                                $\frac{8}{9} \cdot \frac{2}{3} = \frac{16}{27}$ gallons</li>
+                                        </ol>
+                                        <p class="has-text-weight-bold">Final Answer: $\boxed{\frac{16}{27}}$ gallons (Correct)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half">
+                                <div class="notification is-danger">
+                                    <h4 class="title is-5">Original Model Solution</h4>
+                                    <div class="content has-text-justified">
+                                        <p><strong>Step-by-step reasoning:</strong></p>
+                                        <p>The model attempts to solve using sequential calculations:</p>
+                                        <ol>
+                                            <li>Initially, the bucket contains 2 gallons of milk.</li>
+                                            <li>After the first mile: $2 \times \frac{2}{3}$</li>
+                                            <li>After the second mile: $2 \times (\frac{2}{3})^2$</li>
+                                            <li>After the third mile: $2 \times (\frac{2}{3})^3$</li>
+                                        </ol>
+                                        <p>However, makes calculation errors in the final steps.</p>
+                                        <p class="has-text-weight-bold">Final Answer: $\boxed{\frac{8}{27}}$ gallons (Incorrect)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4 class="title is-5">Key Observations:</h4>
+                            <div class="content has-text-justified">
+                                <ul>
+                                    <li>The CFT model maintains precise step-by-step calculations, showing each intermediate fraction.</li>
+                                    <li>The original model has the right approach but makes calculation errors in the final steps.</li>
+                                    <li>CFT demonstrates better ability to track and compute sequential fraction multiplications.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 2: CFT vs SFT -->
+                <div class="box mb-6">
+                    <h3 class="title is-4">Case Study 2: Geometric Area Problem</h3>
+                    <div class="content">
+                        <div class="notification is-info is-light mb-4">
+                            <h4 class="title is-5">Problem:</h4>
+                            <p>As shown, a square is constructed on the hypotenuse of a right triangle whose legs have lengths 3 units and 4 units. What is the area of the pentagon $ABCDE$, in square units?</p>
+                            <p class="has-text-grey">[Note: The figure shows a pentagon formed by a right triangle with legs 3 and 4 units, with a square constructed on its hypotenuse]</p>
+                        </div>
+
+                        <div class="columns is-multiline">
+                            <div class="column is-half">
+                                <div class="notification is-success">
+                                    <h4 class="title is-5">CFT Model Solution</h4>
+                                    <div class="content has-text-justified">
+                                        <p><strong>Step-by-step solution:</strong></p>
+                                        <ol>
+                                            <li><strong>Calculate hypotenuse:</strong><br>
+                                                Using Pythagorean theorem: $\sqrt{3^2 + 4^2} = 5$ units</li>
+                                            <li><strong>Calculate square area:</strong><br>
+                                                Area = $5^2 = 25$ square units</li>
+                                            <li><strong>Calculate triangle area:</strong><br>
+                                                Area = $\frac{1}{2} × 3 × 4 = 6$ square units</li>
+                                            <li><strong>Total pentagon area:</strong><br>
+                                                Area = Square + Triangle = $25 + 6 = 31$ square units</li>
+                                        </ol>
+                                        <p class="has-text-weight-bold">Final Answer: $\boxed{31}$ square units (Correct)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half">
+                                <div class="notification is-warning">
+                                    <h4 class="title is-5">SFT Model Solution</h4>
+                                    <div class="content has-text-justified">
+                                        <p><strong>Step-by-step solution:</strong></p>
+                                        <ol>
+                                            <li><strong>Calculate hypotenuse:</strong><br>
+                                                Using Pythagorean theorem: $\sqrt{3^2 + 4^2} = 5$ units</li>
+                                            <li><strong>Calculate triangle area:</strong><br>
+                                                Area = $\frac{1}{2} × 3 × 4 = 6$ square units</li>
+                                            <li><strong>Calculate square area:</strong><br>
+                                                Area = $5^2 = 25$ square units</li>
+                                            <li><strong>Critical Error:</strong><br>
+                                                Incorrectly subtracts triangle from square instead of adding</li>
+                                        </ol>
+                                        <p class="has-text-weight-bold">Final Answer: $\boxed{19}$ square units (Incorrect)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4 class="title is-5">Key Observations:</h4>
+                            <div class="content has-text-justified">
+                                <ul>
+                                    <li>While both models correctly apply the Pythagorean theorem, their approaches to combining areas differ significantly</li>
+                                    <li>CFT model correctly recognizes that the pentagon is the sum of the square and triangle areas</li>
+                                    <li>SFT model makes a critical conceptual error by subtracting instead of adding the areas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 3: CFT vs SFT (Worker Efficiency Problem) -->
+                <div class="box mb-6">
+                    <h3 class="title is-4">Case Study 3: Worker Efficiency Problem</h3>
+                    <div class="content">
+                        <div class="notification is-info is-light mb-4">
+                            <h4 class="title is-5">Problem:</h4>
+                            <p>Each good worker can paint my new house alone in 12 hours. Each bad worker can paint my house alone in 36 hours. I need my house painted in 3 hours. If I can only find 3 good workers, how many bad workers must I also find in order to have my house painted on time?</p>
+                        </div>
+
+                        <div class="columns is-multiline">
+                            <div class="column is-half">
+                                <div class="notification is-success">
+                                    <h4 class="title is-5">CFT Model Solution</h4>
+                                    <div class="content has-text-justified">
+                                        <p><strong>Step-by-step solution:</strong></p>
+                                        <ol>
+                                            <li><strong>Good worker rate:</strong><br>
+                                                Each good worker: $\frac{1}{12}$ house/hour<br>
+                                                3 good workers: $3 \times \frac{1}{12} = \frac{1}{4}$ house/hour</li>
+                                            <li><strong>Time available:</strong><br>
+                                                3 hours total</li>
+                                            <li><strong>Good workers' contribution:</strong><br>
+                                                In 3 hours: $3 \times \frac{1}{4} = \frac{3}{4}$ of house</li>
+                                            <li><strong>Remaining work for bad workers:</strong><br>
+                                                $1 - \frac{3}{4} = \frac{1}{4}$ of house</li>
+                                            <li><strong>Bad worker contribution:</strong><br>
+                                                Each bad worker in 3 hours: $3 \times \frac{1}{36} = \frac{1}{12}$ of house</li>
+                                            <li><strong>Number of bad workers needed:</strong><br>
+                                                $\frac{1/4}{1/12} = 3$ workers</li>
+                                        </ol>
+                                        <p class="has-text-weight-bold">Final Answer: $\boxed{3}$ bad workers (Correct)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half">
+                                <div class="notification is-warning">
+                                    <h4 class="title is-5">SFT Model Solution</h4>
+                                    <div class="content has-text-justified">
+                                        <p><strong>Analysis of approach:</strong></p>
+                                        <ol>
+                                            <li>Started with correct work rates:
+                                                <ul>
+                                                    <li>Good worker: $\frac{1}{12}$ house/hour</li>
+                                                    <li>Bad worker: $\frac{1}{36}$ house/hour</li>
+                                                </ul>
+                                            </li>
+                                            <li>Made several critical errors:
+                                                <ul>
+                                                    <li>Incorrectly interpreted the remaining work</li>
+                                                    <li>Mixed up rate equations</li>
+                                                    <li>Introduced unrelated concepts (tank filling)</li>
+                                                </ul>
+                                            </li>
+                                            <li>Arrived at incorrect conclusion through faulty reasoning</li>
+                                        </ol>
+                                        <p class="has-text-weight-bold">Final Answer: $\boxed{12}$ bad workers (Incorrect)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4 class="title is-5">Key Observations:</h4>
+                            <div class="content has-text-justified">
+                                <ul>
+                                    <li>CFT model maintains clear focus on the problem's core concept of work rates and time</li>
+                                    <li>SFT model shows significant confusion in problem interpretation and solution approach</li>
+                                    <li>CFT demonstrates superior ability in handling multistep rate problems with different worker types</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- BibTeX citation -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">Reference</h2>
+            Please kindly cite our paper if you use our code or results:
+            <pre><code>@misc{wang2025critiquefinetuninglearningcritique,
+      title={Critique Fine-Tuning: Learning to Critique is More Effective than Learning to Imitate},
+      author={Yubo Wang and Xiang Yue and Wenhu Chen},
+      year={2025},
+      eprint={2501.17703},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2501.17703},
+}</code></pre>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content has-text-centered">
+                        <p>
+                            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
