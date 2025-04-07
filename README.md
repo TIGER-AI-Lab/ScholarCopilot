@@ -48,6 +48,20 @@ bash download.sh
 bash run_demo.sh
 ```
 
+## Update new papers to the corpus
+To update your corpus with the latest papers, follow these steps:
+
+1. Download the most recent arXiv metadata from Kaggle and save it to your chosen ARXIV_META_DATA_PATH
+2. Run the data processing script:
+```bash
+cd utils/
+python process_arxiv_meta_data.py ARXIV_META_DATA_PATH ../data/corpus_data_arxiv_1215.jsonl
+```
+3. Generate the embedding of the corpus
+```bash
+bash encode_corpus.sh
+```
+
 ## 📖 Demo Video
 
 [![Scholar Copilot Demo Video](https://img.youtube.com/vi/QlY7S52sWDA/maxresdefault.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
