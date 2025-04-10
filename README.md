@@ -62,6 +62,11 @@ python process_arxiv_meta_data.py ARXIV_META_DATA_PATH ../data/corpus_data_arxiv
 bash encode_corpus.sh
 ```
 
+4. Convert the embedding to HNSW index for efficient search
+```
+python build_hnsw_index.py --input_dir <embedding dir> --output_dir <hnsw index dir>
+```
+
 ## 📖 Demo Video
 
 [![Scholar Copilot Demo Video](https://img.youtube.com/vi/QlY7S52sWDA/maxresdefault.jpg)](https://www.youtube.com/watch?v=QlY7S52sWDA)
