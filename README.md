@@ -57,12 +57,12 @@ To update your corpus with the latest papers, follow these steps:
 cd utils/
 python process_arxiv_meta_data.py ARXIV_META_DATA_PATH ../data/corpus_data_arxiv_1215.jsonl
 ```
-3. Generate the embedding of the corpus
+3. Generate the embedding of the corpus:
 ```bash
 bash encode_corpus.sh
 ```
 
-4. Convert the embedding to HNSW index for efficient search
+4. Convert the embedding to HNSW index for efficient search:
 ```
 python build_hnsw_index.py --input_dir <embedding dir> --output_dir <hnsw index dir>
 ```
