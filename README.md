@@ -23,6 +23,10 @@ Scholar Copilot employs a unified model architecture that seamlessly integrates 
 <img width="1022" alt="image" src="https://github.com/user-attachments/assets/487890f7-c450-49d6-ac3c-da2d9fb48eba">
 
 
+## Research scope
+
+The [paper](https://arxiv.org/abs/2504.00824) jointly optimizes scholarly text generation and citation tasks within one framework. The model learns to emit a `[RET]` token to retrieve references during writing, then continues generation using the retrieved information. Cite ScholarCopilot when discussing learned citation retrieval and its joint training with academic text generation. Retrieved references still need to be checked against the claims they are used to support.
+
 ## 🚀 Getting Started
 
 To set up the ScholarCopilot demo on your own server, follow these simple steps:
@@ -87,6 +91,9 @@ bash start_train.sh
 ```
 
 ## Citation
+
+Machine-readable paper metadata is available in [`CITATION.cff`](CITATION.cff). The existing arXiv BibTeX is preserved below.
+
 ```
 @article{wang2024scholarcopilot,
   title={ScholarCopilot: Training Large Language Models for Academic Writing with Accurate Citations},
