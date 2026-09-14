@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+message: "If you use ScholarCopilot, please cite the paper below. The preferred citation matches the README arXiv record."
+title: ScholarCopilot
+type: software
+license: MIT
+repository-code: https://github.com/TIGER-AI-Lab/ScholarCopilot
+url: https://tiger-ai-lab.github.io/ScholarCopilot/
+authors:
+  - family-names: Wang
+    given-names: Yubo
+  - family-names: Ma
+    given-names: Xueguang
+  - family-names: Nie
+    given-names: Ping
+  - family-names: Zeng
+    given-names: Huaye
+  - family-names: Lyu
+    given-names: Zhiheng
+  - family-names: Zhang
+    given-names: Yuxuan
+  - family-names: Schneider
+    given-names: Benjamin
+  - family-names: Lu
+    given-names: Yi
+  - family-names: Yue
+    given-names: Xiang
+  - family-names: Chen
+    given-names: Wenhu
+preferred-citation:
+  type: article
+  title: "ScholarCopilot: Training Large Language Models for Academic Writing with Accurate Citations"
+  authors:
+    - family-names: Wang
+      given-names: Yubo
+    - family-names: Ma
+      given-names: Xueguang
+    - family-names: Nie
+      given-names: Ping
+    - family-names: Zeng
+      given-names: Huaye
+    - family-names: Lyu
+      given-names: Zhiheng
+    - family-names: Zhang
+      given-names: Yuxuan
+    - family-names: Schneider
+      given-names: Benjamin
+    - family-names: Lu
+      given-names: Yi
+    - family-names: Yue
+      given-names: Xiang
+    - family-names: Chen
+      given-names: Wenhu
+  journal: "arXiv preprint arXiv:2504.00824"
+  year: 2025
+  doi: 10.48550/arXiv.2504.00824
+  url: https://arxiv.org/abs/2504.00824
